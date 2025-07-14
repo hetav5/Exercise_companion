@@ -134,20 +134,20 @@ li {
   gap: 18px;
   padding: 0;
   margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #days-list li {
-  flex: unset;
   width: 100%;
   max-width: 320px;
+  box-sizing: border-box;
+  list-style: none;
 }
 
 #days-list li a {
   display: block;
   width: 100%;
-  min-width: 180px;
-  max-width: 320px;
-  text-align: center;
   background: linear-gradient(90deg, #2d6cdf 0%, #184a99 100%);
   color: #fff;
   text-decoration: none;
@@ -158,7 +158,33 @@ li {
   box-shadow: 0 2px 8px rgba(44, 108, 223, 0.10);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   letter-spacing: 1px;
+  text-align: center;
   margin: 0 auto;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+/* Responsive fix for mobile */
+@media (max-width: 600px) {
+  #days-list {
+    gap: 10px;
+    width: 100%;
+  }
+
+  #days-list li,
+  #days-list li a {
+    max-width: 98vw;
+    width: 98vw;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 20px;
+  }
+
+  #days-list li a {
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 
 /* Weight Log Section */
@@ -188,20 +214,26 @@ li {
 }
 
 .weight-log button {
-  background: #2d6cdf;
+  background: linear-gradient(90deg, #2d6cdf 0%, #184a99 100%);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 6px 18px;
-  font-size: 1rem;
+  border-radius: 24px;
+  padding: 10px 28px;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 8px;
-  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(44, 108, 223, 0.12);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 1px;
 }
 
-.weight-log button:hover {
-  background: #184a99;
+.weight-log button:hover,
+.weight-log button:focus {
+  background: linear-gradient(90deg, #184a99 0%, #2d6cdf 100%);
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(44, 108, 223, 0.18);
+  outline: none;
 }
 
 .last-weight {
@@ -293,5 +325,27 @@ li {
     padding: 10px 8vw;
     font-size: 0.95rem;
     border-radius: 20px;
+  }
+}
+
+/* Weight Log Section - Responsive */
+@media (max-width: 600px) {
+  .weight-log {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .weight-log input {
+    width: 60px;
+  }
+
+  .weight-log button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+
+  .last-weight {
+    font-size: 0.9rem;
   }
 }
