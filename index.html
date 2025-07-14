@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta name="theme-color" content="#3498db">
+  <meta name="theme-color" content="#3498db">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +13,35 @@
   <title>Exercise Planner</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
     <h1>Welcome to Your Exercise Planner</h1>
     <div id="datetime"></div>
     <div id="today-exercise-link"></div>
+
+    <div id="go-back-section">
+      <h2>Go to Any Day's Exercise</h2>
+      <ul id="days-list">
+        <li><a href="monday.html">Monday</a></li>
+        <li><a href="tuesday.html">Tuesday</a></li>
+        <li><a href="wednesday.html">Wednesday</a></li>
+        <li><a href="thursday.html">Thursday</a></li>
+        <li><a href="friday.html">Friday</a></li>
+        <li><a href="saturday.html">Saturday</a></li>
+      </ul>
+    </div>
   </div>
   <script src="script.js"></script>
   <script>
-  document.getElementById('homeBtn').onclick = function() {
-    window.location.href = '/Exercise_companion/index.html';
-  };
-   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service_worker.js')
-      .then(() => console.log("Service Worker Registered"));
-  }
+    document.getElementById('homeBtn').onclick = function () {
+      window.location.href = '/Exercise_companion/index.html';
+    };
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service_worker.js')
+        .then(() => console.log("Service Worker Registered"));
+    }
   </script>
 </body>
+
 </html>

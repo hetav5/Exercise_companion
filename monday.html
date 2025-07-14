@@ -20,12 +20,28 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Incline-Dumbbell-Press">
+          <label for="weight-monday-Incline-Dumbbell-Press">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Incline-Dumbbell-Press" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Incline-Dumbbell-Press')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Incline-Dumbbell-Press"></div>
+        </div>
+      </div>
       <li>Chest Fly - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/eGjt4lk6g34?si=dNFZVGB-KND7a6F-&amp;start=1"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Chest-Fly">
+          <label for="weight-monday-Chest-Fly">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Chest-Fly" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Chest-Fly')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Chest-Fly"></div>
+        </div>
       </div>
     </ul>
     <ul>
@@ -37,12 +53,28 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Shoulder-Press">
+          <label for="weight-monday-Shoulder-Press">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Shoulder-Press" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Shoulder-Press')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Shoulder-Press"></div>
+        </div>
+      </div>
       <li>Lateral Raise - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/XPPfnSEATJA?si=UT97DVZ4_pkAlJof"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Lateral-Raise">
+          <label for="weight-monday-Lateral-Raise">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Lateral-Raise" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Lateral-Raise')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Lateral-Raise"></div>
+        </div>
       </div>
     </ul>
     <ul>
@@ -55,6 +87,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Bar-Push-Down">
+          <label for="weight-monday-Bar-Push-Down">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Bar-Push-Down" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Bar-Push-Down')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Bar-Push-Down"></div>
+        </div>
+      </div>
       <li>Overhead Rope Triceps Extension - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/kqidUIf1eJE?si=Nxd3gL1bX_DZnoPp"
@@ -62,10 +102,44 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="monday" data-exercise="Overhead-Rope-Triceps-Extension">
+          <label for="weight-monday-Overhead-Rope-Triceps-Extension">Log your weight (kg):</label>
+          <input type="number" id="weight-monday-Overhead-Rope-Triceps-Extension" min="0" step="0.1">
+          <button onclick="saveWeight('monday', 'Overhead-Rope-Triceps-Extension')">Save</button>
+          <div class="last-weight" id="last-weight-monday-Overhead-Rope-Triceps-Extension"></div>
+        </div>
+      </div>
     </ul>
     <button id="homeBtn">Back to Home</button>
   </div>
   <script>
+    function saveWeight(day, exercise) {
+      const input = document.getElementById('weight-' + day + '-' + exercise);
+      const weight = input.value;
+      if (weight) {
+        localStorage.setItem('weight-' + day + '-' + exercise, weight);
+        showLastWeight(day, exercise);
+      }
+    }
+
+    function showLastWeight(day, exercise) {
+      const lastWeight = localStorage.getItem('weight-' + day + '-' + exercise);
+      const display = document.getElementById('last-weight-' + day + '-' + exercise);
+      if (lastWeight) {
+        display.textContent = "Last logged weight: " + lastWeight + " kg";
+      } else {
+        display.textContent = "No weight logged yet.";
+      }
+    }
+
+    // On page load, show last weight for each exercise
+    document.querySelectorAll('.weight-log').forEach(function (logDiv) {
+      const day = logDiv.getAttribute('data-day');
+      const exercise = logDiv.getAttribute('data-exercise');
+      showLastWeight(day, exercise);
+    });
+
     document.getElementById('homeBtn').onclick = function () {
       window.location.href = 'index.html'; // Change this if your home page has a different filename or path
     };

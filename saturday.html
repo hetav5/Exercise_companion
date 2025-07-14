@@ -20,12 +20,28 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="saturday" data-exercise="Squats">
+          <label for="weight-saturday-Squats">Log your weight (kg):</label>
+          <input type="number" id="weight-saturday-Squats" min="0" step="0.1">
+          <button onclick="saveWeight('saturday', 'Squats')">Save</button>
+          <div class="last-weight" id="last-weight-saturday-Squats"></div>
+        </div>
+      </div>
       <li>Leg Extensions - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/m0FOpMEgero?si=gIwcDz_3zAIKoHYe&amp;start=1"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="saturday" data-exercise="Leg-Extension">
+          <label for="weight-saturday-Leg-Extension">Log your weight (kg):</label>
+          <input type="number" id="weight-saturday-Leg-Extension" min="0" step="0.1">
+          <button onclick="saveWeight('saturday', 'Leg-Extension')">Save</button>
+          <div class="last-weight" id="last-weight-saturday-Leg-Extension"></div>
+        </div>
       </div>
     </ul>
     <ul>
@@ -37,6 +53,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="saturday" data-exercise="Lying-Leg-Curls">
+          <label for="weight-saturday-Lying-Leg-Curls">Log your weight (kg):</label>
+          <input type="number" id="weight-saturday-Lying-Leg-Curls" min="0" step="0.1">
+          <button onclick="saveWeight('saturday', 'Lying-Leg-Curls')">Save</button>
+          <div class="last-weight" id="last-weight-saturday-Lying-Leg-Curls"></div>
+        </div>
+      </div>
     </ul>
     <ul>
       <h3>Calfs</h3>
@@ -47,6 +71,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="saturday" data-exercise="Calf-Raises">
+          <label for="weight-saturday-Calf-Raises">Log your weight (kg):</label>
+          <input type="number" id="weight-saturday-Calf-Raises" min="0" step="0.1">
+          <button onclick="saveWeight('saturday', 'Calf-Raises')">Save</button>
+          <div class="last-weight" id="last-weight-saturday-Calf-Raises"></div>
+        </div>
+      </div>
     </ul>
     <button id="homeBtn">Back to Home</button>
   </div>
@@ -54,6 +86,32 @@
     document.getElementById('homeBtn').onclick = function () {
       window.location.href = 'index.html'; // Change this if your home page has a different filename or path
     };
+
+    function saveWeight(day, exercise) {
+      const input = document.getElementById('weight-' + day + '-' + exercise);
+      const weight = input.value;
+      if (weight) {
+        localStorage.setItem('weight-' + day + '-' + exercise, weight);
+        showLastWeight(day, exercise);
+      }
+    }
+
+    function showLastWeight(day, exercise) {
+      const lastWeight = localStorage.getItem('weight-' + day + '-' + exercise);
+      const display = document.getElementById('last-weight-' + day + '-' + exercise);
+      if (lastWeight) {
+        display.textContent = "Last logged weight: " + lastWeight + " kg";
+      } else {
+        display.textContent = "No weight logged yet.";
+      }
+    }
+
+    // On page load, show last weight for each exercise
+    document.querySelectorAll('.weight-log').forEach(function (logDiv) {
+      const day = logDiv.getAttribute('data-day');
+      const exercise = logDiv.getAttribute('data-exercise');
+      showLastWeight(day, exercise);
+    });
   </script>
 </body>
 

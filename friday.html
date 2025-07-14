@@ -20,6 +20,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="Lat-Pulldown">
+          <label for="weight-friday-Lat-Pulldown">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-Lat-Pulldown" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'Lat-Pulldown')">Save</button>
+          <div class="last-weight" id="last-weight-friday-Lat-Pulldown"></div>
+        </div>
+      </div>
       <li>Hyperextension - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315"
@@ -27,6 +35,14 @@
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="Hyperextension">
+          <label for="weight-friday-Hyperextension">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-Hyperextension" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'Hyperextension')">Save</button>
+          <div class="last-weight" id="last-weight-friday-Hyperextension"></div>
+        </div>
       </div>
     </ul>
     <ul>
@@ -38,6 +54,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="Bayesian-Cable-Curls">
+          <label for="weight-friday-Bayesian-Cable-Curls">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-Bayesian-Cable-Curls" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'Bayesian-Cable-Curls')">Save</button>
+          <div class="last-weight" id="last-weight-friday-Bayesian-Cable-Curls"></div>
+        </div>
+      </div>
       <li>EZ Bar Curls - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315"
@@ -45,6 +69,14 @@
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="EZ-Bar-Curls">
+          <label for="weight-friday-EZ-Bar-Curls">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-EZ-Bar-Curls" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'EZ-Bar-Curls')">Save</button>
+          <div class="last-weight" id="last-weight-friday-EZ-Bar-Curls"></div>
+        </div>
       </div>
     </ul>
     <ul>
@@ -57,6 +89,14 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="Cable-Rear-Delt-Fly">
+          <label for="weight-friday-Cable-Rear-Delt-Fly">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-Cable-Rear-Delt-Fly" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'Cable-Rear-Delt-Fly')">Save</button>
+          <div class="last-weight" id="last-weight-friday-Cable-Rear-Delt-Fly"></div>
+        </div>
+      </div>
       <li>Dumbbell Rear Delt Fly- 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315"
@@ -65,12 +105,47 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <div class="exercise">
+        <div class="weight-log" data-day="friday" data-exercise="Dumbbell-Rear-Delt-Fly">
+          <label for="weight-friday-Dumbbell-Rear-Delt-Fly">Log your weight (kg):</label>
+          <input type="number" id="weight-friday-Dumbbell-Rear-Delt-Fly" min="0" step="0.1">
+          <button onclick="saveWeight('friday', 'Dumbbell-Rear-Delt-Fly')">Save</button>
+          <div class="last-weight" id="last-weight-friday-Dumbbell-Rear-Delt-Fly"></div>
+        </div>
+      </div>
       <button id="homeBtn">Back to Home</button>
   </div>
   <script>
     document.getElementById('homeBtn').onclick = function () {
       window.location.href = 'index.html'; // Change this if your home page has a different filename or path
     };
+  </script>
+  <script>
+    function saveWeight(day, exercise) {
+      const input = document.getElementById('weight-' + day + '-' + exercise);
+      const weight = input.value;
+      if (weight) {
+        localStorage.setItem('weight-' + day + '-' + exercise, weight);
+        showLastWeight(day, exercise);
+      }
+    }
+
+    function showLastWeight(day, exercise) {
+      const lastWeight = localStorage.getItem('weight-' + day + '-' + exercise);
+      const display = document.getElementById('last-weight-' + day + '-' + exercise);
+      if (lastWeight) {
+        display.textContent = "Last logged weight: " + lastWeight + " kg";
+      } else {
+        display.textContent = "No weight logged yet.";
+      }
+    }
+
+    // On page load, show last weight for each exercise
+    document.querySelectorAll('.weight-log').forEach(function (logDiv) {
+      const day = logDiv.getAttribute('data-day');
+      const exercise = logDiv.getAttribute('data-exercise');
+      showLastWeight(day, exercise);
+    });
   </script>
 </body>
 

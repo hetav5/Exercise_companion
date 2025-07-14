@@ -20,12 +20,26 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <!-- Incline Dumbbell Press -->
+      <div class="weight-log" data-day="thursday" data-exercise="Incline-Dumbbell-Press">
+        <label for="weight-thursday-Incline-Dumbbell-Press">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Incline-Dumbbell-Press" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Incline-Dumbbell-Press')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Incline-Dumbbell-Press"></div>
+      </div>
       <li>Cable Fly - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/JHqmhZ12rr0?si=gj7bDDs17OXbMyDt"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <!-- Cable Fly -->
+      <div class="weight-log" data-day="thursday" data-exercise="Cable-Fly">
+        <label for="weight-thursday-Cable-Fly">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Cable-Fly" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Cable-Fly')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Cable-Fly"></div>
       </div>
     </ul>
     <ul>
@@ -37,12 +51,26 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <!-- Arnold Press -->
+      <div class="weight-log" data-day="thursday" data-exercise="Arnold-Press">
+        <label for="weight-thursday-Arnold-Press">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Arnold-Press" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Arnold-Press')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Arnold-Press"></div>
+      </div>
       <li>Cable Lateral Raise - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Fv-eAW1uKDI?si=nGm5qsrM8bEhVvJx"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <!-- Cable Lateral Raise -->
+      <div class="weight-log" data-day="thursday" data-exercise="Cable-Lateral-Raise">
+        <label for="weight-thursday-Cable-Lateral-Raise">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Cable-Lateral-Raise" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Cable-Lateral-Raise')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Cable-Lateral-Raise"></div>
       </div>
     </ul>
     <ul>
@@ -54,6 +82,13 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+      <!-- Rope Pushdown -->
+      <div class="weight-log" data-day="thursday" data-exercise="Rope-Pushdown">
+        <label for="weight-thursday-Rope-Pushdown">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Rope-Pushdown" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Rope-Pushdown')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Rope-Pushdown"></div>
+      </div>
       <li>Skull Crushers - 3 x 12</li>
       <div class="exercise">
         <iframe width="560" height="315"
@@ -61,6 +96,14 @@
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <!-- Skullcrushers -->
+      <div class="weight-log" data-day="thursday" data-exercise="Skullcrushers">
+        <label for="weight-thursday-Skullcrushers">Log your weight (kg):</label>
+        <input type="number" id="weight-thursday-Skullcrushers" min="0" step="0.1">
+        <button onclick="saveWeight('thursday', 'Skullcrushers')">Save</button>
+        <div class="last-weight" id="last-weight-thursday-Skullcrushers"></div>
+      </div>
     </ul>
     <button id="homeBtn">Back to Home</button>
   </div>
@@ -68,7 +111,32 @@
     document.getElementById('homeBtn').onclick = function () {
       window.location.href = 'index.html'; // Change this if your home page has a different filename or path
     };
+
+    function saveWeight(day, exercise) {
+      const input = document.getElementById('weight-' + day + '-' + exercise);
+      const weight = input.value;
+      if (weight) {
+        localStorage.setItem('weight-' + day + '-' + exercise, weight);
+        showLastWeight(day, exercise);
+      }
+    }
+
+    function showLastWeight(day, exercise) {
+      const lastWeight = localStorage.getItem('weight-' + day + '-' + exercise);
+      const display = document.getElementById('last-weight-' + day + '-' + exercise);
+      if (lastWeight) {
+        display.textContent = "Last logged weight: " + lastWeight + " kg";
+      } else {
+        display.textContent = "No weight logged yet.";
+      }
+    }
+
+    // On page load, show last weight for each exercise
+    document.querySelectorAll('.weight-log').forEach(function (logDiv) {
+      const day = logDiv.getAttribute('data-day');
+      const exercise = logDiv.getAttribute('data-exercise');
+      showLastWeight(day, exercise);
+    });
   </script>
 </body>
-
 </html>
